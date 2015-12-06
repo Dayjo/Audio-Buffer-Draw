@@ -3,7 +3,9 @@ var audioContext = new webkitAudioContext();
 function drawBuffer( width, height, context, buffer ) {
     var data = buffer.getChannelData( 0 );
     var step = Math.ceil( data.length / width );
+    var deg = step * 360;
     var amp = height / 2;
+    
     for(var i=0; i < width; i++){
         var min = 1.0;
         var max = -1.0;
@@ -14,7 +16,8 @@ function drawBuffer( width, height, context, buffer ) {
             if (datum > max)
                 max = datum;
         }
-        context.fillRect(i,(1+min)*amp,1,Math.max(1,(max-min)*amp));
+        
+        context.fillRect(i*deg, (1+min)*amp*deg, 1*deg ,Math.max(1,(max-min)*amp) *deg);
     }
 }
 
